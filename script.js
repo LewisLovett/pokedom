@@ -1,14 +1,17 @@
-import pokemonArray from './data/pokemon.js';
+import allPokemonArray from './data/pokemon.js';
+const cardContainer = document.querySelector(".card-container");
+let cardHTML = "";
 
 const renderSearchHTML = () => {
-    const body = document.querySelector("h1");
-    const searchHTML = '<input class="nameSearch">';
-    body.insertAdjacentHTML("afterend", searchHTML);
+    const header = document.querySelector("h1");
+    const searchHTML = '<input class="nameSearch"><button class="searchBtn">Search</button>';
+    header.insertAdjacentHTML("afterend", searchHTML);
+    document.querySelector(".searchBtn").addEventListener("click",searchCard);
 }
 
-const renderCards = () => {
-    const cardContainer = document.querySelector(".card-container");
-    let cardHTML = "";
+const renderCards = (pokemonArray) => {
+    cardContainer.innerHTML = "";
+    cardHTML = "";
     for(let pos in pokemonArray){
         let pokemon = pokemonArray[pos];
         let pokemonName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
@@ -28,5 +31,16 @@ const renderCards = () => {
     }
     cardContainer.innerHTML += cardHTML;
 }
+
+const searchCard = () => {
+    const pokemonName = document.querySelector(".nameSearch").value;
+    let filteredPokemon =[]
+    for (let pos in allPokemonArray){
+        if (allPokemonArray[pos].name == pokemonName){
+            filteredPokemon.push(allPokemonArray[pos])
+        }
+    }
+    renderCards(filteredPokemon);
+}
 renderSearchHTML();
-renderCards();
+renderCards(allPokemonArray);
