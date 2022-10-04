@@ -1,5 +1,11 @@
 import pokemonArray from './data/pokemon.js';
 
+const renderSearchHTML = () => {
+    const body = document.querySelector("h1");
+    const searchHTML = '<input class="nameSearch">';
+    body.insertAdjacentHTML("afterend", searchHTML);
+}
+
 const renderCards = () => {
     const cardContainer = document.querySelector(".card-container");
     let cardHTML = "";
@@ -22,5 +28,5 @@ const renderCards = () => {
     }
     cardContainer.innerHTML += cardHTML;
 }
-
+renderSearchHTML();
 renderCards();
